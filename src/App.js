@@ -3,6 +3,10 @@ import "./styles.css";
 import React from "react";
 
 export default function App() {
+  function handleInputChange(e) {
+    setTodo(e.target.value);
+  }
+
   //Todoを作った際に追跡する用
   const [todos, setTodos] = useState([]);
   //Inputに記入された時用
@@ -26,17 +30,22 @@ export default function App() {
   return (
     <>
       <div className="App">
-        <form>
-          <input name="todo" type="text" placeholder="Create a new Todo!!" />
+        <form onSubmit={handleFormSubmit}>
+          <input
+            name="todo"
+            type="text"
+            value={todo}
+            placeholder="Create a new Todo!!"
+            onChange={handleInputChange}
+          />
         </form>
 
         <li>
           {todos.map((todo) => (
-            <li>{todo}</li>
+            <li key={todo.id}>{todo.text}</li>
           ))}
         </li>
       </div>
-      <p>{todo}</p>
     </>
   );
 }
